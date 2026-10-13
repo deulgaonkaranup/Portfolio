@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anup Deulgaonkar | Sr. Software Developer</title>
+  
+  <!-- Google Fonts & Tailwind CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#0284c7',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 glass border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#blog" onclick="switchTab('blog')" class="flex items-center space-x-2 text-slate-900 dark:text-white font-mono font-bold text-lg hover:text-brand-600 dark:hover:text-brand-400 transition">
+        <span class="text-brand-600 dark:text-brand-400">&lt;</span><span>Anup Deulgaonkar</span><span class="text-brand-600 dark:text-brand-400">/&gt;</span>
+      </a>
+
+      <!-- Desktop Nav Tabs -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-medium ml-auto">
+        <button id="nav-blog" onclick="switchTab('blog')" class="nav-btn px-3 py-2 rounded-lg text-brand-600 bg-brand-50 font-semibold transition">
+          <i class="fa-solid fa-newspaper mr-1.5 opacity-70"></i>Blog
+        </button>
+        <button id="nav-about" onclick="switchTab('about')" class="nav-btn px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition">
+          <i class="fa-solid fa-user mr-1.5 opacity-70"></i>About Me
+        </button>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center space-x-3 md:hidden">
+        <button onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-4 pt-2 pb-4 space-y-1">
+      <button onclick="switchTab('blog'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-md font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i class="fa-solid fa-newspaper w-6"></i> Blog
+      </button>
+      <button onclick="switchTab('about'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-md font-medium text-slate-700 hover:bg-slate-100">
+        <i class="fa-solid fa-user w-6"></i> About Me
+      </button>
+      <div class="pt-2">
+        <button onclick="openEditorModal(); toggleMobileMenu()" class="w-full flex items-center justify-center space-x-2 px-3 py-2 rounded-md font-mono text-sm bg-brand-600 text-white font-medium">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span>Write / Publish Article</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: ABOUT ME (PHOTO + HIGH LEVEL BIO)   -->
+    <!-- ========================================== -->
+    <section id="tab-about" class="tab-content hidden space-y-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        
+        <!-- Left Column: Profile Card / Photo -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 text-center">
+          <div class="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto rounded-2xl overflow-hidden ">
+              <img src="assets/Profile.png" alt="Anup Deulgaonkar" class="w-160 h-160 rounded-none object-cover">
+          </div>
+
+          <div>
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white">Anup Deulgaonkar</h2>
+            <p class="text-xs font-mono text-brand-600 dark:text-brand-400 mt-1">Software Developer</p>
+            <p class="text-xs text-slate-500 mt-0.5">Based in California</p>
+          </div>
+
+          <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-center space-x-4 text-slate-600 dark:text-slate-400">
+            <a href="https://www.linkedin.com/in/deulgaonkaranup" target="_blank" class="hover:text-brand-600"><i class="fa-brands fa-linkedin text-lg"></i></a>
+            <a href="https://github.com/deulgaonkaranup" target="_blank" class="hover:text-brand-600"><i class="fa-brands fa-github text-lg"></i></a>
+            <a href="mailto:anup.deulgaonkar@gmail.com" class="hover:text-brand-600"><i class="fa-solid fa-envelope text-lg"></i></a>
+          </div>
+        </div>
+
+        <!-- Right Column: Narrative Bio -->
+        <div class="md:col-span-2 space-y-6">
+          <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
+            
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3">
+              About Me
+            </h3>
+
+            <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+              I’ve spent years making computers do what they’re told. Now I’m curious about computers that seem to have opinions of their own. Exploring AI through first principles, I like understanding what happens under the hood, from transformer architectures to RAG pipelines, rather than taking the magic at face value. My approach? Question assumptions, experiment with ideas, and build things to see what actually works. Less hype, more engineering.
+            </p>
+
+            <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+              Professionally, I’ve worked on distributed systems, large-scale data processing, and performance optimization. With a background in computer science and computational intelligence, I’m now applying that engineering mindset to understanding and building AI-powered applications.
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: BLOG                               -->
+    <!-- ========================================== -->
+    <section id="tab-blog" class="tab-content hidden space-y-8">
+
+      <div class="grid grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)] gap-8">
+        <aside class="space-y-6">
+          <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-sm">
+            <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500 mb-4">Categories</h2>
+            <div id="blog-tags-filter" class="flex flex-wrap gap-2"></div>
+          </div>
+
+          <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-sm">
+            <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500 mb-4">Latest Articles</h2>
+            <div id="blog-latest-list" class="space-y-4"></div>
+          </div>
+        </aside>
+
+        <div class="space-y-6">
+          <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 shadow-sm">
+            <label for="blog-search" class="sr-only">Search articles</label>
+            <div class="relative">
+              <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input id="blog-search" type="search" placeholder="Search articles, topics, or keywords" class="w-full pl-10 pr-3 py-2.5 rounded-lg border border-slate-200 bg-slate-50 dark:bg-slate-800 dark:border-slate-700 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:border-brand-500">
+            </div>
+          </div>
+
+          <div id="blog-articles-grid" class="space-y-4">
+            <!-- Dynamically Rendered Articles -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-6 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>© 2026 Anup Deulgaonkar.</p>
+      <div class="flex items-center space-x-4">
+        <a href="mailto:anup.deulgaonkar@gmail.com" class="hover:underline">anup.deulgaonkar@gmail.com</a>
+        <a href="https://github.com/deulgaonkaranup" target="_blank" class="hover:underline">GitHub</a>
+        <a href="https://www.linkedin.com/in/deulgaonkaranup" target="_blank" class="hover:underline">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- MODAL 1: ARTICLE READER                    -->
+  <!-- ========================================== -->
+  <div id="modal-article-reader" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm overflow-y-auto p-4 sm:p-6 md:p-10">
+    <div class="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden my-8">
+      
+      <!-- Modal Reader Header -->
+      <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between sticky top-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur">
+        <span id="reader-category" class="px-2.5 py-1 rounded text-xs font-mono bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 font-medium">
+          Category
+        </span>
+        <button onclick="closeReaderModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Reader Body -->
+      <div class="p-6 sm:p-8 space-y-6">
+        <div>
+          <h1 id="reader-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
+            Article Title
+          </h1>
+          <div class="flex items-center space-x-4 text-xs font-mono text-slate-400 mt-3">
+            <span id="reader-date">Oct 9, 2026</span>
+            <span>•</span>
+            <span id="reader-readtime">5 min read</span>
+            <span>•</span>
+            <span id="reader-author">Anup Deulgaonkar</span>
+          </div>
+        </div>
+
+        <div id="reader-content" class="prose dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-sm leading-relaxed space-y-4">
+          <!-- Article Content Rendered Here -->
+        </div>
+      </div>
+
+      <!-- Reader Footer -->
+      <div class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 text-right">
+        <button onclick="closeReaderModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 rounded-lg text-xs font-medium transition">
+          Close Article
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL 2: NEW POST CMS EDITOR               -->
+  <!-- ========================================== -->
+  <div id="modal-editor" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm overflow-y-auto p-4 sm:p-6">
+    <div class="max-w-2xl mx-auto bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden my-8">
+      
+      <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+          <i class="fa-solid fa-pen-to-square text-brand-600 dark:text-brand-400"></i>
+          <span>Publish New Technical Article</span>
+        </h2>
+        <button onclick="closeEditorModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handlePublishArticle(event)" class="p-6 space-y-4">
+        <div>
+          <label class="block text-xs font-mono uppercase text-slate-400 mb-1">Article Title</label>
+          <input type="text" id="editor-title" required placeholder="e.g. Optimizing RabbitMQ Pipelines for High Concurrency" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:border-brand-500">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-mono uppercase text-slate-400 mb-1">Category / Tag</label>
+            <input type="text" id="editor-category" required placeholder="e.g. Distributed Systems" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:border-brand-500">
+          </div>
+          <div>
+            <label class="block text-xs font-mono uppercase text-slate-400 mb-1">Estimated Read Time</label>
+            <input type="text" id="editor-readtime" required placeholder="e.g. 6 min read" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:border-brand-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono uppercase text-slate-400 mb-1">Short Excerpt / Summary</label>
+          <textarea id="editor-summary" required rows="2" placeholder="Brief 1-2 sentence overview for the article card..." class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:border-brand-500"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono uppercase text-slate-400 mb-1">Article Body (Supports HTML formatting & &lt;pre&gt; code tags)</label>
+          <textarea id="editor-body" required rows="8" placeholder="<p>Write your detailed technical explanation here...</p>" class="w-full font-mono text-xs px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:border-brand-500"></textarea>
+        </div>
+
+        <div class="pt-4 flex items-center justify-end space-x-3 border-t border-slate-200 dark:border-slate-800">
+          <button type="button" onclick="closeEditorModal()" class="px-4 py-2 text-xs font-medium text-slate-600 dark:text-slate-400 hover:underline">
+            Cancel
+          </button>
+          <button type="submit" class="px-5 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-xs font-mono font-semibold transition shadow">
+            Publish Article
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="./articles/articles.js"></script>
+
+  <!-- JAVASCRIPT APP LOGIC -->
+  <script>
+    // LocalStorage Initialization for Blog Articles
+    let articles = JSON.parse(localStorage.getItem('anup_blog_articles')) || (window.articleCatalog || []);
+    let selectedTag = 'All';
+
+    // TAB SWITCHING FUNCTION
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-brand-600', 'bg-brand-50', 'font-semibold');
+        btn.classList.add('text-slate-600');
+      });
+
+      const activeNav = document.getElementById(`nav-${tabId}`);
+      if (activeNav) {
+        activeNav.classList.add('text-brand-600', 'bg-brand-50', 'font-semibold');
+        activeNav.classList.remove('text-slate-600');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // MOBILE MENU TOGGLE
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // RENDER HOME FEATURED ARTICLES
+    function renderHomeArticles() {
+      const container = document.getElementById('home-featured-articles');
+      if (!container) return;
+
+      container.innerHTML = articles.slice(0, 2).map(art => `
+        <a href="./articles/${art.file || 'post-1.html'}" class="block p-5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-brand-500 transition space-y-2 group">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+            <span class="text-brand-600 dark:text-brand-400 font-medium">${art.category}</span>
+            <span>${art.readTime}</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-brand-600 transition">${art.title}</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2">${art.summary}</p>
+        </a>
+      `).join('');
+    }
+
+    function renderLatestArticles() {
+      const latestList = document.getElementById('blog-latest-list');
+      if (!latestList) return;
+
+      latestList.innerHTML = articles.slice(0, 4).map(art => `
+        <a href="./articles/${art.file || 'post-1.html'}" class="block rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 p-3 hover:border-brand-500 transition group">
+          <div class="text-[10px] font-mono uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-1">${art.category}</div>
+          <div class="text-sm font-semibold text-slate-800 dark:text-slate-100 group-hover:text-brand-600 transition leading-snug">${art.title}</div>
+        </a>
+      `).join('');
+    }
+
+    // RENDER BLOG ARTICLES & FILTER TAGS
+    function renderBlogArticles() {
+      const grid = document.getElementById('blog-articles-grid');
+      const tagsContainer = document.getElementById('blog-tags-filter');
+      const latestList = document.getElementById('blog-latest-list');
+      const searchInput = document.getElementById('blog-search');
+      const query = (searchInput?.value || '').toLowerCase();
+
+      if (tagsContainer) {
+        const categories = ['All', ...new Set(articles.map(a => a.category))];
+        tagsContainer.innerHTML = categories.map(cat => `
+          <button onclick="filterByTag('${cat}')" class="px-3 py-1.5 rounded-full text-xs font-mono transition ${
+            selectedTag === cat 
+              ? 'bg-brand-600 text-white font-semibold shadow-sm' 
+              : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+          }">
+            ${cat}
+          </button>
+        `).join('');
+      }
+
+      const filtered = articles.filter(art => {
+        const matchesTag = selectedTag === 'All' || art.category === selectedTag;
+        const matchesQuery = !searchInput || art.title.toLowerCase().includes(query) || 
+                             art.summary.toLowerCase().includes(query) || 
+                             art.category.toLowerCase().includes(query);
+        return matchesTag && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 py-12 text-center text-slate-500 text-sm font-mono">No articles found matching your criteria.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(art => `
+        <a href="./articles/${art.file || 'post-1.html'}" class="block rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 shadow-sm hover:shadow-md transition group p-6">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+            <span class="inline-flex w-fit px-2.5 py-1 rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 text-[11px] font-mono font-medium">${art.category}</span>
+            <div class="text-[11px] font-mono text-slate-400">${art.date} • ${art.readTime}</div>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-brand-600 transition leading-tight mb-3">${art.title}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">${art.summary}</p>
+          <div class="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-4">
+            <span class="text-xs font-mono text-slate-500">Read article</span>
+            <span class="text-brand-600 dark:text-brand-400 text-sm font-semibold group-hover:translate-x-1 transition-transform inline-block">Read more →</span>
+          </div>
+        </a>
+      `).join('');
+
+      if (latestList) {
+        renderLatestArticles();
+      }
+    }
+
+    function filterByTag(tag) {
+      selectedTag = tag;
+      renderBlogArticles();
+    }
+
+    // READER MODAL LOGIC
+    function openReaderModal(articleId) {
+      const art = articles.find(a => a.id === articleId);
+      if (!art) return;
+
+      document.getElementById('reader-title').innerText = art.title;
+      document.getElementById('reader-category').innerText = art.category;
+      document.getElementById('reader-date').innerText = art.date;
+      document.getElementById('reader-readtime').innerText = art.readTime;
+      document.getElementById('reader-content').innerHTML = art.content;
+
+      document.getElementById('modal-article-reader').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeReaderModal() {
+      document.getElementById('modal-article-reader').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // CMS EDITOR MODAL LOGIC
+    function openEditorModal() {
+      document.getElementById('modal-editor').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeEditorModal() {
+      document.getElementById('modal-editor').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    function handlePublishArticle(event) {
+      event.preventDefault();
+
+      const newArticle = {
+        id: `post-${Date.now()}`,
+        title: document.getElementById('editor-title').value,
+        category: document.getElementById('editor-category').value,
+        readTime: document.getElementById('editor-readtime').value,
+        summary: document.getElementById('editor-summary').value,
+        content: document.getElementById('editor-body').value,
+        date: 'Oct 2026'
+      };
+
+      articles.unshift(newArticle);
+      localStorage.setItem('anup_blog_articles', JSON.stringify(articles));
+
+      closeEditorModal();
+      renderHomeArticles();
+      renderBlogArticles();
+      switchTab('blog');
+
+      // Clear form
+      event.target.reset();
+    }
+
+    // INITIAL RENDER ON LOAD
+    document.addEventListener('DOMContentLoaded', () => {
+      const blogSearch = document.getElementById('blog-search');
+      if (blogSearch) {
+        blogSearch.addEventListener('input', renderBlogArticles);
+      }
+
+      renderLatestArticles();
+      renderBlogArticles();
+      switchTab('blog');
+    });
+  </script>
+
+</body>
+</html>

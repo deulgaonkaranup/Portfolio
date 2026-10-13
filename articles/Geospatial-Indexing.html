@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>High-Throughput Geospatial Indexing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] } } }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+  <header class="border-b border-slate-200 bg-white/80 backdrop-blur">
+    <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="../index.html#blog" class="text-sm font-medium text-brand-600 hover:underline">← Back to blog</a>
+      <a href="../index.html" class="text-sm font-medium text-slate-600 hover:underline">Home</a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-12">
+    <div class="mb-6">
+      <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-mono bg-brand-50 text-brand-600 font-medium">Geospatial Architecture</span>
+    </div>
+
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">High-Throughput Geospatial Indexing with Protocol Buffers & Delta Encoding</h1>
+
+    <div class="mt-4 flex items-center gap-3 text-xs font-mono text-slate-500">
+      <span>Oct 2026</span>
+      <span>•</span>
+      <span>6 min read</span>
+      <span>•</span>
+      <span>Anup Deulgaonkar</span>
+    </div>
+
+    <article class="mt-10 prose prose-slate max-w-none text-slate-700 leading-relaxed">
+      <p>Geospatial query endpoints often suffer from high payload serialization overhead when transferring dense point-in-polygon coordinates and POI metadata. During our architectural overhaul, we transitioned legacy serialization formats to <strong>Protocol Buffers</strong> coupled with <strong>delta encoding</strong>.</p>
+
+      <h3>Key Optimizations</h3>
+      <ul>
+        <li><strong>Delta Coordinate Compression:</strong> Storing relative offsets rather than absolute 64-bit floating point coordinates reduced byte representation significantly.</li>
+        <li><strong>Geometry Quantization:</strong> Scaled floating-point coordinates into discrete integers for fixed precision, trimming mobile API payload sizes by ~50%.</li>
+        <li><strong>Zero-Copy Deserialization:</strong> Streamlined payload parsing directly on the server to prevent CPU stalls under peak concurrency.</li>
+      </ul>
+
+      <pre class="bg-slate-900 text-slate-100 p-4 rounded-lg font-mono text-xs overflow-x-auto">
+// Example Protocol Buffer definition for quantized geometry
+syntax = "proto3";
+
+message SpatialPoint {
+  sint32 delta_x = 1; // Quantized integer offset
+  sint32 delta_y = 2;
+}
+
+message GeospatialFeatureBatch {
+  uint64 base_latitude = 1;
+  uint64 base_longitude = 2;
+  repeated SpatialPoint points = 3;
+}</pre>
+
+      <p>The resulting architecture yielded a <strong>1.7x payload size reduction</strong> and increased request concurrency by roughly <strong>40%</strong> under load tests.</p>
+    </article>
+  </main>
+</body>
+</html>
